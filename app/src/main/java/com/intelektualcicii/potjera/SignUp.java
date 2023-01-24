@@ -44,7 +44,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
         mAuth = FirebaseAuth.getInstance();
 
+        logIn.setOnClickListener(this);
         createAccount.setOnClickListener(this);
+
     }
 
     @Override
