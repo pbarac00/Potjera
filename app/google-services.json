@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "895356786577",
+    "project_id": "potjera-f9b2e",
+    "storage_bucket": "potjera-f9b2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895356786577:android:f87a1984a332dfb64c2c30",
+        "android_client_info": {
+          "package_name": "com.intelektualcicii.potjera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "895356786577-sghui2hrqsevm8o4kvmm9ef9rjl2v1bf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.intelektualcicii.potjera",
+            "certificate_hash": "2ed88eab07882d3a246d4eb75a3225d020e2e996"
+          }
+        },
+        {
+          "client_id": "895356786577-tgvn3gmjgfdkvufgjqqjftmfon17egdf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb9gNZ_Nk1vcIl91Y9DaZgRh3hKV-E6mw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "895356786577-tgvn3gmjgfdkvufgjqqjftmfon17egdf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
