@@ -1,0 +1,2 @@
+# Potjera
+Android seminar
