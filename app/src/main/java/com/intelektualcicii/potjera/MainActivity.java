@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
 
                     if (user.isEmailVerified()){
+                        //ovdje dodat animaciju jer triba vrimena da pokupi podatke
                         startActivity(new Intent(MainActivity.this, UserProfile.class));
                     }
                     else {
