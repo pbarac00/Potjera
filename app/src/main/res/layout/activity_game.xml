@@ -10,9 +10,9 @@
         android:id="@+id/bt_ans1_Game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
         android:layout_marginTop="30dp"
-        android:text="ANS1"
+        android:text="TEXT PITANJA TEXT PITANJA TEXT PITANJA"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_questionText_Game" />
 
@@ -20,30 +20,30 @@
         android:id="@+id/bt_ans2_Game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="50dp"
-        android:text="ANS2"
+        android:layout_marginTop="10dp"
+        android:text="TEXT PITANJA TEXT PITANJA TEXT PITANJA"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_questionText_Game" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_ans1_Game" />
 
     <Button
         android:id="@+id/bt_ans3_Game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
-        android:text="ANS3"
+        android:layout_marginTop="10dp"
+        android:text="TEXT PITANJA TEXT PITANJA TEXT PITANJA"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_ans1_Game" />
+        app:layout_constraintTop_toBottomOf="@+id/bt_ans4_Game" />
 
     <Button
         android:id="@+id/bt_ans4_Game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="50dp"
-        android:text="ANS4"
+        android:layout_marginTop="10dp"
+        android:text="TEXT PITANJA TEXT PITANJA TEXT PITANJA"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_ans2_Game" />
 
     <TextView

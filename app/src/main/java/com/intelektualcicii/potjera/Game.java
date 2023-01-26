@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,13 +24,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class Game extends AppCompatActivity {
+public class Game extends AppCompatActivity implements View.OnClickListener {
 
-    TextView questionText_tv,timer_tv;
+    TextView questionText_tv, timer_tv;
     Button ans1_bt, ans2_bt, ans3_bt, ans4_bt;
     ColorStateList textColorDefaultBt;
-    List<Question> questionsLists= new ArrayList<>();
-    int questionCounter,questionCountTotal ,score, answered;
+    List<Question> questionsLists = new ArrayList<>();
+    int questionCounter, questionCountTotal, score, answered;
 
     Question currentQuestion;
 
@@ -39,15 +41,14 @@ public class Game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        questionText_tv=findViewById(R.id.tv_questionText_Game);
-        ans1_bt=findViewById(R.id.bt_ans1_Game);
-        ans2_bt=findViewById(R.id.bt_ans2_Game);
-        ans3_bt=findViewById(R.id.bt_ans3_Game);
-        ans4_bt=findViewById(R.id.bt_ans4_Game);
-        timer_tv=findViewById(R.id.tv_timer_Game);
+        questionText_tv = findViewById(R.id.tv_questionText_Game);
+        ans1_bt = findViewById(R.id.bt_ans1_Game);
+        ans2_bt = findViewById(R.id.bt_ans2_Game);
+        ans3_bt = findViewById(R.id.bt_ans3_Game);
+        ans4_bt = findViewById(R.id.bt_ans4_Game);
+        timer_tv = findViewById(R.id.tv_timer_Game);
 
-        textColorDefaultBt=ans1_bt.getTextColors();
-
+        textColorDefaultBt = ans1_bt.getTextColors();
 
 
         {
@@ -57,18 +58,18 @@ public class Game extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    for (DataSnapshot dataSnapshot: snapshot.getChildren())
-                    {
-                        Question question= dataSnapshot.getValue(Question.class);
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        Question question = dataSnapshot.getValue(Question.class);
                         questionsLists.add(question);
                     }
 
-                    questionCountTotal= questionsLists.size();
-                    questionCounter=0;
+                    questionCountTotal = questionsLists.size();
+                    questionCounter = 0;
 
                     Collections.shuffle(questionsLists);
                     showNextQuestion();
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     Toast.makeText(Game.this, "Something wrong happened", Toast.LENGTH_SHORT).show();
@@ -83,15 +84,14 @@ public class Game extends AppCompatActivity {
         ans3_bt.setTextColor(textColorDefaultBt);
         ans4_bt.setTextColor(textColorDefaultBt);
 
-        Log.d("valueOfquestionCounter", "showNextQuestion: "+ questionCounter);
-        Log.d("ccc", "showNextQuestion: "+ questionCountTotal);
+        Log.d("valueOfquestionCounter", "showNextQuestion: " + questionCounter);
+        Log.d("ccc", "showNextQuestion: " + questionCountTotal);
 
-        if (questionCounter<questionCountTotal)
-        {
-            currentQuestion=questionsLists.get(questionCounter);
-            Log.d("valueOfcurrentQuestion", "showNextQuestion: "+ currentQuestion);
-            Log.d("valueOfquestionsLists", "showNextQuestion: "+ questionsLists.get(questionCounter) );
-            Log.d("valueOfcurrentQuestion.questionText", "showNextQuestion: "+ currentQuestion.questionText);
+        if (questionCounter < questionCountTotal) {
+            currentQuestion = questionsLists.get(questionCounter);
+            Log.d("valueOfcurrentQuestion", "showNextQuestion: " + currentQuestion);
+            Log.d("valueOfquestionsLists", "showNextQuestion: " + questionsLists.get(questionCounter));
+            Log.d("valueOfcurrentQuestion.questionText", "showNextQuestion: " + currentQuestion.questionText);
 
             questionText_tv.setText(currentQuestion.questionText);
             ans1_bt.setText(currentQuestion.answ1);
@@ -99,15 +99,41 @@ public class Game extends AppCompatActivity {
             ans3_bt.setText(currentQuestion.answ3);
             ans4_bt.setText(currentQuestion.answ4);
 
+
+            ans1_bt.setOnClickListener(this);
+            ans2_bt.setOnClickListener(this);
+            ans3_bt.setOnClickListener(this);
+            ans4_bt.setOnClickListener(this);
+
+
             questionCounter++;
-        }
-        else{
+        } else {
             finishQuiz();
         }
     }
 
     private void finishQuiz() {
-       finish();
+        finish();
     }
 
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bt_ans1_Game:
+                Toast.makeText(this, "bt_ans1_Game clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.bt_ans2_Game:
+                Toast.makeText(this, "bt_ans2_Game clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.bt_ans3_Game:
+                Toast.makeText(this, "bt_ans3_Game clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.bt_ans4_Game:
+                Toast.makeText(this, "bt_ans4_Game clicked", Toast.LENGTH_SHORT).show();
+                break;
+
+
+        }
+    }
 }
