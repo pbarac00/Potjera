@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class UserProfile extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseUser user;
@@ -40,6 +42,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         user= FirebaseAuth.getInstance().getCurrentUser();
         reference= FirebaseDatabase.getInstance().getReference("Users");
         userID=user.getUid();
+
+
 
 
         fullName_tv=findViewById(R.id.tv_fullName_UP);

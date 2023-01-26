@@ -1,21 +1,25 @@
 package com.intelektualcicii.potjera;
 
-//nisan siguran triba li ova klasa
+
 public class Question {
 
-    public String questionId, questionText, questionCorrectAnsw,
-            questionWrongAns1,getQuestionWrongAns2,getQuestionWrongAns3;
+    public String questionText, correctAnsw,
+            answ1,answ2,answ3,answ4;
 
 
     public Question() {
     }
 
-    public Question(String questionId, String questionText, String questionCorrectAnsw, String questionWrongAns1, String getQuestionWrongAns2, String getQuestionWrongAns3) {
-        this.questionId = questionId;
+    public Question( String questionText, String correctAnsw,
+                    String answ1, String answ2, String answ3, String answ4) {
+
         this.questionText = questionText;
-        this.questionCorrectAnsw = questionCorrectAnsw;
-        this.questionWrongAns1 = questionWrongAns1;
-        this.getQuestionWrongAns2 = getQuestionWrongAns2;
-        this.getQuestionWrongAns3 = getQuestionWrongAns3;
+        this.correctAnsw = correctAnsw;
+        this.answ1 = answ1;
+        this.answ2 = answ2;
+        this.answ3 = answ3;
+        this.answ4 = answ4;
     }
+
+
 }
