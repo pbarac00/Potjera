@@ -27,7 +27,6 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
-
     private String id;
 
     TextView fullName_tv;

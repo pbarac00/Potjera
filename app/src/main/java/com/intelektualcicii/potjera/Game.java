@@ -6,7 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,14 +27,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+import java.util.Timer;
 
 public class Game extends AppCompatActivity implements View.OnClickListener {
 
-    TextView questionText_tv, timer_tv;
+    TextView questionText_tv, timer_tv, score_tv;
     Button ans1_bt, ans2_bt, ans3_bt, ans4_bt;
-    ColorStateList textColorDefaultBt;
     List<Question> questionsLists = new ArrayList<>();
-    int questionCounter, questionCountTotal, score, answered;
+    int questionCounter, questionCountTotal,score, answeredButton;
+    private static final long COUNTDOWN_IN_MS = 30020; // 30 sec and 20 ms
+    private long timeLeftInMs;
+    private CountDownTimer countDownTimer;
+
 
     Question currentQuestion;
 
@@ -47,8 +56,8 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         ans3_bt = findViewById(R.id.bt_ans3_Game);
         ans4_bt = findViewById(R.id.bt_ans4_Game);
         timer_tv = findViewById(R.id.tv_timer_Game);
+        score_tv=findViewById(R.id.tv_score_Game);
 
-        textColorDefaultBt = ans1_bt.getTextColors();
 
 
         {
@@ -62,12 +71,12 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
                         Question question = dataSnapshot.getValue(Question.class);
                         questionsLists.add(question);
                     }
-
                     questionCountTotal = questionsLists.size();
                     questionCounter = 0;
-
+                    score=0;
                     Collections.shuffle(questionsLists);
                     showNextQuestion();
+                    startCountDown();
                 }
 
                 @Override
@@ -79,41 +88,59 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void showNextQuestion() {
-        ans1_bt.setTextColor(textColorDefaultBt);
-        ans2_bt.setTextColor(textColorDefaultBt);
-        ans3_bt.setTextColor(textColorDefaultBt);
-        ans4_bt.setTextColor(textColorDefaultBt);
-
-        Log.d("valueOfquestionCounter", "showNextQuestion: " + questionCounter);
-        Log.d("ccc", "showNextQuestion: " + questionCountTotal);
+        ans1_bt.setBackgroundColor(Color.GRAY);
+        ans2_bt.setBackgroundColor(Color.GRAY);
+        ans3_bt.setBackgroundColor(Color.GRAY);
+        ans4_bt.setBackgroundColor(Color.GRAY);
 
         if (questionCounter < questionCountTotal) {
             currentQuestion = questionsLists.get(questionCounter);
-            Log.d("valueOfcurrentQuestion", "showNextQuestion: " + currentQuestion);
-            Log.d("valueOfquestionsLists", "showNextQuestion: " + questionsLists.get(questionCounter));
-            Log.d("valueOfcurrentQuestion.questionText", "showNextQuestion: " + currentQuestion.questionText);
 
+            score_tv.setText(""+score);
             questionText_tv.setText(currentQuestion.questionText);
             ans1_bt.setText(currentQuestion.answ1);
             ans2_bt.setText(currentQuestion.answ2);
             ans3_bt.setText(currentQuestion.answ3);
             ans4_bt.setText(currentQuestion.answ4);
 
-
             ans1_bt.setOnClickListener(this);
             ans2_bt.setOnClickListener(this);
             ans3_bt.setOnClickListener(this);
             ans4_bt.setOnClickListener(this);
 
+            timeLeftInMs=COUNTDOWN_IN_MS;
 
-            questionCounter++;
         } else {
-            finishQuiz();
+            finishGame();
         }
     }
 
-    private void finishQuiz() {
-        finish();
+    private void startCountDown() {
+        countDownTimer = new CountDownTimer(timeLeftInMs,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMs=millisUntilFinished;
+                updateCoundownTimerTextView();
+            }
+            @Override
+            public void onFinish() {
+                timeLeftInMs=0;
+                finishGame();
+            }
+        }.start();
+        }
+
+    private void updateCoundownTimerTextView() {
+        int minutes= (int)(timeLeftInMs/1000)/60;
+        int seconds= (int) (timeLeftInMs/1000)%60;
+        String timeLeft= String.format(Locale.getDefault(), "%02d:%02d", minutes,seconds);
+        timer_tv.setText(timeLeft);
+    }
+
+    private void finishGame() {
+        Intent i =new Intent(Game.this, Game_SaveResult.class);
+        i.putExtra("score", ""+score);
+        startActivity(i);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -121,19 +148,64 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_ans1_Game:
-                Toast.makeText(this, "bt_ans1_Game clicked", Toast.LENGTH_SHORT).show();
+                showSolution(currentQuestion.answ1);
                 break;
             case R.id.bt_ans2_Game:
-                Toast.makeText(this, "bt_ans2_Game clicked", Toast.LENGTH_SHORT).show();
+                showSolution(currentQuestion.answ2);
                 break;
             case R.id.bt_ans3_Game:
-                Toast.makeText(this, "bt_ans3_Game clicked", Toast.LENGTH_SHORT).show();
+                showSolution(currentQuestion.answ3);
                 break;
             case R.id.bt_ans4_Game:
-                Toast.makeText(this, "bt_ans4_Game clicked", Toast.LENGTH_SHORT).show();
+                showSolution(currentQuestion.answ4);
                 break;
+        }
+    }
 
+    private void showSolution(String chosedQuestion) {
+
+        if (chosedQuestion.equals(currentQuestion.correctAnsw))
+        {
+            //prikazi zeleni text i uvecaj counter;
+            score+=500;
+            questionCounter++;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    showNextQuestion();
+                }
+            }, 250);
 
         }
+            else {
+            //tocan odgovor postaje zelen, promini boje
+               if (currentQuestion.correctAnsw.equals(currentQuestion.answ1) )
+                   ans1_bt.setBackgroundColor(Color.GREEN);
+               else if (currentQuestion.correctAnsw.equals(currentQuestion.answ2))
+                   ans2_bt.setBackgroundColor(Color.GREEN);
+               else if (currentQuestion.correctAnsw.equals(currentQuestion.answ3))
+                   ans3_bt.setBackgroundColor(Color.GREEN);
+               else if (currentQuestion.correctAnsw.equals(currentQuestion.answ4))
+                   ans4_bt.setBackgroundColor(Color.GREEN);
+
+            questionCounter++;
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    showNextQuestion();
+                }
+            }, 1000);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (countDownTimer != null)
+        {
+            countDownTimer.cancel();
+        }
+
     }
 }
