@@ -11,7 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="TEXT PITANJA TEXT PITANJA TEXT PITANJA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_questionText_Game" />
@@ -21,7 +20,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="TEXT PITANJA TEXT PITANJA TEXT PITANJA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_ans1_Game" />
@@ -31,7 +29,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="TEXT PITANJA TEXT PITANJA TEXT PITANJA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_ans4_Game" />
@@ -41,7 +38,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="TEXT PITANJA TEXT PITANJA TEXT PITANJA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_ans2_Game" />
@@ -50,9 +46,8 @@
         android:id="@+id/tv_questionText_Game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="80dp"
         android:paddingLeft="30dp"
-        android:text="TEXT PITANJA TEXT PITANJA TEXT PITANJA TEXT PITANJA TEXT PITANJA TEXT PITANJATEXT PITANJA TEXT PITANJA TEXT PITANJATEXT PITANJA "
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,9 +76,9 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="44dp"
-        android:layout_height="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="Score: "
         app:layout_constraintEnd_toEndOf="@+id/tv_timer_Game"
         app:layout_constraintStart_toStartOf="@+id/tv_timer_Game"
