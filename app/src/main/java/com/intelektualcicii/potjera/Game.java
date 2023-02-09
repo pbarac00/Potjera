@@ -141,6 +141,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         Intent i =new Intent(Game.this, Game_SaveResult.class);
         i.putExtra("score", ""+score);
         startActivity(i);
+        this.finish();
     }
 
     @SuppressLint("NonConstantResourceId")

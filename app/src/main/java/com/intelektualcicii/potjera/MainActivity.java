@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -91,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (user.isEmailVerified()){
                         //ovdje dodat animaciju jer triba vrimena da pokupi podatke
                         startActivity(new Intent(MainActivity.this, UserProfile.class));
+
+
                     }
                     else {
                         user.sendEmailVerification();
@@ -103,4 +107,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+
+
 }

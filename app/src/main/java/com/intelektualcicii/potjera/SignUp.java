@@ -57,6 +57,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.tv_logIn_SignUp:
                 startActivity(new Intent(this, MainActivity.class));
+                this.finish();
                 break;
         }
     }
