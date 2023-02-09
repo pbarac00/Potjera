@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId())
         {
             case R.id.tv_signUp:
-                startActivity(new Intent(this, SignUp.class));
+                startActivity(new Intent(this, SignUpActivity.class));
                 break;
             case R.id.bt_login:
                 userLogin();
@@ -92,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     if (user.isEmailVerified()){
                         //ovdje dodat animaciju jer triba vrimena da pokupi podatke
-                        startActivity(new Intent(MainActivity.this, UserProfile.class));
+                        startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
 
 
                     }

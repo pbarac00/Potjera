@@ -20,7 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class SignUp extends AppCompatActivity implements View.OnClickListener {
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     TextView activityName, logIn;
     EditText fullName_et, email_et, password_et;
     Button createAccount;
@@ -114,18 +114,18 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(SignUp.this, "User has been register successfully", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SignUpActivity.this, "User has been register successfully", Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
                                     }
                                     else{
-                                        Toast.makeText(SignUp.this, "User has not been register successfully", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SignUpActivity.this, "User has not been register successfully", Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
                                     }
                                 }
                             });
                 }
                 else{
-                    Toast.makeText(SignUp.this, "User has not been register successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "User has not been register successfully", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                 }
                 }

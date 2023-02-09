@@ -16,42 +16,42 @@
         android:theme="@style/Theme.Potjera"
         tools:targetApi="31">
         <activity
-            android:name=".Game_SaveResult"
+            android:name=".Game_SaveResultActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UserGameResults"
+            android:name=".UserGameResultsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Game"
+            android:name=".GameActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Top10"
+            android:name=".Top10Activity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".UserProfile"
+            android:name=".UserProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".SignUp"
+            android:name=".SignUpActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

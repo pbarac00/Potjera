@@ -5,13 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,13 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.Timer;
 
-public class Game extends AppCompatActivity implements View.OnClickListener {
+public class GameActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView questionText_tv, timer_tv, score_tv;
     Button ans1_bt, ans2_bt, ans3_bt, ans4_bt;
@@ -81,7 +76,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(Game.this, "Something wrong happened", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GameActivity.this, "Something wrong happened", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -138,7 +133,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void finishGame() {
-        Intent i =new Intent(Game.this, Game_SaveResult.class);
+        Intent i =new Intent(GameActivity.this, Game_SaveResultActivity.class);
         i.putExtra("score", ""+score);
         startActivity(i);
         this.finish();

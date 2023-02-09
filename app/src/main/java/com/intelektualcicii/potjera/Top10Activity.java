@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-public class Top10 extends AppCompatActivity {
+public class Top10Activity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 

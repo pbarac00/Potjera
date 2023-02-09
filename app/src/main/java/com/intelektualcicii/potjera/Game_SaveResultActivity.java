@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Game_SaveResult extends AppCompatActivity implements View.OnClickListener {
+public class Game_SaveResultActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView scoreValue_tv;
     Button saveResult_bt, dismissResult_bt;
@@ -50,11 +50,9 @@ public class Game_SaveResult extends AppCompatActivity implements View.OnClickLi
         switch (v.getId())
         {
             case R.id.bt_saveResult_Game_SaveResult:
-                Toast.makeText(this, "kliknuto save", Toast.LENGTH_SHORT).show();
                 break;
             case  R.id.bt_dismissResult_Game_SaveResult:
-                Toast.makeText(this, "kliknuto dismiss", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, UserProfile.class));
+                startActivity(new Intent(this, UserProfileActivity.class));
                 this.finish();
                 break;
         }
