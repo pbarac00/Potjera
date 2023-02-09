@@ -1,5 +1,6 @@
 package com.intelektualcicii.potjera;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -12,8 +13,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Game_SaveResultActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,9 +30,7 @@ public class Game_SaveResultActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_save_result);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-        String userID = user.getUid();
+
 
         scoreValue_tv=findViewById(R.id.tv_score_value_Game_SaveResult);
         String score = getIntent().getExtras().getString("score","0");
@@ -40,16 +42,20 @@ public class Game_SaveResultActivity extends AppCompatActivity implements View.O
         saveResult_bt.setOnClickListener(this);
         dismissResult_bt.setOnClickListener(this);
 
-
-
-
     }
+
+
+
 
     @Override
     public void onClick(View v) {
         switch (v.getId())
         {
             case R.id.bt_saveResult_Game_SaveResult:
+                saveGameResult();
+                Toast.makeText(this, "successfully saved", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, UserProfileActivity.class));
+                this.finish();
                 break;
             case  R.id.bt_dismissResult_Game_SaveResult:
                 startActivity(new Intent(this, UserProfileActivity.class));
@@ -58,4 +64,46 @@ public class Game_SaveResultActivity extends AppCompatActivity implements View.O
         }
 
     }
+
+    private void saveGameResult() {
+
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        String userID = user.getUid();
+
+
+        User user2=new User();
+        String score = getIntent().getExtras().getString("score","0");
+
+        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User userProfile= snapshot.getValue(User.class);
+                if (userProfile != null){
+                    //ako je vec igrao kviz, postoji vec neki rezultat koji se dohvaca, sprema se na kraj niza rezultat nove igre te
+                    //se sprema nova lista
+                    if (userProfile.gamesList!= null)
+                    {
+                        user2.gamesList=userProfile.gamesList;
+                        user2.addResultOnEndOfGameList(score);
+                        reference.child(userID).child("gamesList").setValue(user2.gamesList);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Game_SaveResultActivity.this, "Something wrong happened", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        }
+
+
+
+
+
 }
