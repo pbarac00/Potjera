@@ -96,7 +96,7 @@ public class Game extends AppCompatActivity implements View.OnClickListener {
         if (questionCounter < questionCountTotal) {
             currentQuestion = questionsLists.get(questionCounter);
 
-            score_tv.setText(""+score);
+            score_tv.setText("Score: "+score);
             questionText_tv.setText(currentQuestion.questionText);
             ans1_bt.setText(currentQuestion.answ1);
             ans2_bt.setText(currentQuestion.answ2);
