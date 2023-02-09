@@ -53,7 +53,6 @@ public class Game_SaveResultActivity extends AppCompatActivity implements View.O
         {
             case R.id.bt_saveResult_Game_SaveResult:
                 saveGameResult();
-                Toast.makeText(this, "successfully saved", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, UserProfileActivity.class));
                 this.finish();
                 break;
