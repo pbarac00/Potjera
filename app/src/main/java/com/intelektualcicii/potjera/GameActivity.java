@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView questionText_tv, timer_tv, score_tv;
     Button ans1_bt, ans2_bt, ans3_bt, ans4_bt;
+    boolean timerIsNotRuning;
     List<Question> questionsLists = new ArrayList<>();
     int questionCounter, questionCountTotal,score, answeredButton;
     private static final long COUNTDOWN_IN_MS = 30020; // 30 sec and 20 ms
@@ -37,6 +39,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
     Question currentQuestion;
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -111,6 +114,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void startCountDown() {
+        timerIsNotRuning=false;
         countDownTimer = new CountDownTimer(timeLeftInMs,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -204,4 +208,26 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timerIsNotRuning=true;
+        countDownTimer.cancel();
+
+        Log.d("onPauseCalled","onPauseCalled");
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (timerIsNotRuning == true)
+        {
+            startCountDown();
+        }
+
+    }
+
+
 }
